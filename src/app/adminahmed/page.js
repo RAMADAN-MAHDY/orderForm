@@ -158,7 +158,7 @@ const Admin = () => {
                 <div className="relative top-[8px]" >
                     <AiFillSmile className='text-[#ddff00] w-[50px] h-[50px] bg-[#000] rounded-full' onClick={() => {
                         setNotices(!Notices);
-                        localStorage.removeItem("newConditionlength");
+                        typeof window !== 'undefined' &&localStorage.removeItem("newConditionlength");
                     }} />
 
                     <p className="text-[#ffffff] text-[15px] w-[30px] h-[30px] pt-[0.3rem] pr-[0.75rem] rounded-full bg-[#ff1100] absolute top-[-9px] right-[40px]">
