@@ -3,8 +3,8 @@
 import { useState } from 'react';
 
 function LoginForm({ onSignInSuccess }) {
-    const [email, setEmail] = useState(localStorage.getItem('emailorderform') || '');
-     const [code, setcodel] = useState(localStorage.getItem('codeorderform') || '');
+    const [email, setEmail] = useState( typeof window !== 'undefined' ?localStorage.getItem('emailorderform') || '':'');
+     const [code, setcodel] = useState( typeof window !== 'undefined' ?localStorage.getItem('codeorderform') || '':'');
     const [password, setPassword] = useState('');
     const [go, setGo] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');

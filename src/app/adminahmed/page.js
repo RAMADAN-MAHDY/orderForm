@@ -21,7 +21,7 @@ const Admin = () => {
 
     const [newConditionlenth, setNewConditionlength] = useState(() => {
         // استرجاع البيانات المخزنة في localStorage عند تحميل الصفحة
-        const savedConditions = localStorage.getItem('newConditionlength');
+        const savedConditions = typeof window !== 'undefined' ? localStorage.getItem('newConditionlength') || '' : '';
         return savedConditions ? JSON.parse(savedConditions) : [];
     });
 
@@ -105,12 +105,12 @@ const Admin = () => {
             // تحديث الحالة والإضافة إلى localStorage
             setNewCondition(prevConditions => {
                 const updatedConditions = [...prevConditions, Object.values(data)];
-                localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
+                typeof window !== 'undefined' && localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
                 return updatedConditions;
             });
             setNewConditionlength(prevConditions => {
                 const updatedConditions = [...prevConditions, Object.values(data)];
-                localStorage.setItem('newConditionlength', JSON.stringify(updatedConditions));
+                typeof window !== 'undefined' && localStorage.setItem('newConditionlength', JSON.stringify(updatedConditions));
                 return updatedConditions;
             });
 

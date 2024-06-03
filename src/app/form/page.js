@@ -4,7 +4,7 @@ import { useState , useCallback} from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const ConditionForm = () => {
-    const [usercode, setUsercode] = useState(localStorage.getItem('codeorderform') || '');
+    const [usercode, setUsercode] = useState( typeof window !== 'undefined' ?localStorage.getItem('codeorderform') || '':'');
     const [err , setErr] = useState();
     const [isLoading, setIsLoading] = useState(false);
 

@@ -7,8 +7,8 @@ import Link from 'next/link';
 // import io from 'socket.io-client';
 
 export default function Home() {
-    const [userEmail, setUserEmail] = useState(localStorage.getItem('emailorderform') || '');
-    const [usercode, setUsercode] = useState(localStorage.getItem('codeorderform') || '');
+    const [userEmail, setUserEmail] = useState( typeof window !== 'undefined' ?localStorage.getItem('emailorderform') || '' : '');
+    const [usercode, setUsercode] = useState( typeof window !== 'undefined' ?localStorage.getItem('codeorderform') || '':'');
     const handleSignInSuccess = (email,code) => {
         setUserEmail(email);
         setUsercode(code);
