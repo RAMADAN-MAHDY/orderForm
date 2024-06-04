@@ -18,7 +18,17 @@ export default function Home() {
     }
       console.log(userEmail)
       console.log(usercode)
+      const [showChild, setShowChild] = useState(false)
 
+      useEffect(() => {
+        setShowChild(true)
+      }, [])
+
+      
+  if (!showChild) {
+    return null
+  }
+  
   return (
 
     <main className="flex min-h-screen flex-col items-center  pt-6">
