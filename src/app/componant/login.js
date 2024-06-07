@@ -54,7 +54,7 @@ function LoginForm({ onSignInSuccess }) {
     return (
         <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
-                <label htmlFor="email" className={`block ${go === true ? "text-[#449029]" : "text-gray-700"} text-sm font-bold mb-2`}>البريد الإلكتروني</label>
+                <label htmlFor="email" className={`block ${go === true ? "text-[#449029]" : "text-gray-700"} text-sm font-bold mb-2`}> اسم المستخدم</label>
                 <input
                     type="text"
                     id="email"
