@@ -52,7 +52,7 @@ const Admin = () => {
                 return updatedLength;
             });
         });
-        socket.on('unseen-notifications', (data) => {
+        socket.on('unread-notifications', (data) => {
             console.log('Received unseen notifications:', data);
             setNewCondition(prevConditions => {
                 const updatedConditions = [...prevConditions, data];
