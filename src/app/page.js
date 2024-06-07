@@ -47,7 +47,7 @@ export default function Home() {
          <div className="mb-3 self-center border border-gray-400 rounded-lg p-4 group hover:bg-white bg-gradient-to-br from-red-500 to-blue-500 via-green-500">
 
 <span className="bg-clip-text bg-gradient-to-br from-red-500 to-blue-500 via-green-500 text-[#fff] hover:text-white animate-pulse">
-  Roial corner
+  Royal corner
 </span>
 </div>
 {usercode&& <>

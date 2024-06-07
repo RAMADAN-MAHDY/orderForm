@@ -70,8 +70,8 @@ const SignUpComponent = () => {
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
         <input
         required
-          type="email"
-          placeholder="Email"
+          type="text"
+          placeholder="اسم المستخدم"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded mb-4"

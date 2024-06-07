@@ -52,9 +52,30 @@ const Admin = () => {
                 return updatedLength;
             });
         });
+        socket.on('unseen-notifications', (data) => {
+            console.log('Received unseen notifications:', data);
+            setNewCondition(prevConditions => {
+                const updatedConditions = [...prevConditions, data];
+                localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
+                return updatedConditions;
+            });
+            setNewConditionLength(prevLength => {
+                const updatedLength = prevLength + 1;
+                localStorage.setItem('newConditionLength', updatedLength.toString());
+                return updatedLength;
+            });
+            
+            // افعل أي شيء آخر تحتاج إليه هنا
+        });
+
         return () => {
             socket.disconnect();
         };
+       
+        
+        
+        // يمكنك استقبال أي حدث آخر هنا
+        
     }, []);
 
     const handleSearchInputChange = (event) => {
@@ -88,7 +109,7 @@ const Admin = () => {
                 <h1 className='text-[#ffffff] sm:h-[50px] h-[40px] mb-3 sm:text-[24px] p-1 bg-[#c5c5c1] shadow-[0_35px_35px_rgba(3,3,3,1.25)]'> بسم الله الرحمن الرحيم</h1>
                 <div className="mb-3 h-[60px] self-center border border-gray-400 rounded-lg p-4 group hover:bg-white bg-gradient-to-br from-red-500 to-blue-500 via-green-500">
                     <span className="h-[60px] bg-clip-text bg-gradient-to-br from-red-500 to-blue-500 via-green-500 text-[#fff] hover:text-white animate-pulse">
-                        Roial corner
+                        Royal corner
                     </span>
                 </div>
             </div>
@@ -120,6 +141,7 @@ const Admin = () => {
                     <table className="table-auto w-full border-collapse">
                         <thead>
                             <tr className='text-[#32ff46] bg-[#433]'>
+                            <th className="border border-gray-800 px-4 py-2">العدد</th>
                                 <th className="border border-gray-800 px-4 py-2">الاسم</th>
                                 <th className="border border-gray-800 px-4 py-2">الكود</th>
                                 <th className="border border-gray-800 px-4 py-2">عرض الطلبات</th>
@@ -128,6 +150,7 @@ const Admin = () => {
                         <tbody>
                             {filteredData.map((dataItem) => (
                                 <tr key={dataItem.code}>
+                                     <td className="border border-gray-800 px-4 py-2">{} قيد لانشاء</td>
                                     <td className="border border-gray-800 px-4 py-2">{dataItem.email}</td>
                                     <td className="border border-gray-800 px-4 py-2">{dataItem.code}</td>
                                     <td className="border border-gray-800 px-4 py-2">
