@@ -133,8 +133,7 @@ useEffect(() => {
   const getTableRowContent = (rowData) => {
     return `
         ${rowData.clientname} \t ${rowData.phone} \t ${rowData.covernorate} \t ${rowData.city} \t
-        ${rowData.productname} \t ${rowData.productprece} \t ${rowData.quantity} \t ${rowData.productorder} \t
-        ${rowData.commition} \t ${rowData.total}
+        ${rowData.productname}  \t ${rowData.quantity} \t ${rowData.total}
     `;
 };
 
