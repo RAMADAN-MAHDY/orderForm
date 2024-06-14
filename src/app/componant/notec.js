@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const Notec = ({ lengthpro }) => {
+const Notec = ({ lengthpro, unseedata }) => {
+    console.log(unseedata)
     // استخدام دالة slice() لإنشاء نسخة جديدة من المصفوفة
     const [lengthpros, setlengthpro] = useState([...lengthpro]);
 
@@ -14,7 +15,13 @@ const Notec = ({ lengthpro }) => {
             initial={{ translateY: -100, opacity: 0 }}
             animate={{ translateY: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-        >
+        > 
+        
+          {lengthpros.length>0 && lengthpros.map((eo, index) => (
+            <p key={index} className="p-1 text-[#000]">
+                تم ارسال طلب من هذا الكود : {eo}
+            </p>
+        ))}
             {lengthprosrevers && lengthprosrevers.map((eo, index) => (
                 <p key={index} className="p-1 text-[#000]">
                     تم ارسال طلب من هذا الكود : {eo}

@@ -7,13 +7,19 @@ import Link from 'next/link';
 
 const Admin = () => {
     const [data, setData] = useState(null);
+    const [length, setLength] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [lengthisLoading, setLengthIsLoading] = useState(true);
     const [searchInput, setSearchInput] = useState('');
     const [newCondition, setNewCondition] = useState([]);
+    const [newConditionnotSee, setnewConditionnotSee] = useState([]);
     const [newConditionLength, setNewConditionLength] = useState(0);
     const [notices, setNotices] = useState(false);
 
-    console.log(newCondition)
+    // console.log(newCondition)
+    console.log(length)
+    // console.log(newConditionnotSee[0])
+    // console.log(newConditionnotSee)
     useEffect(() => {
         // localStorage.removeItem("newCondition");
 
@@ -39,7 +45,29 @@ const Admin = () => {
     }, []);
 
     useEffect(() => {
-        const socket = io('https://api-order-form.onrender.com');
+        const fetchLength = async () => {
+            try {
+                const response = await fetch('https://api-order-form.onrender.com/lengthoforder');
+                setLengthIsLoading(false);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch length');
+                }
+                const responseData = await response.json();
+                setLength(responseData);
+            } catch (error) {
+                console.error('Error fetching length:', error);
+                setLengthIsLoading(false);
+
+            }
+        };
+    
+        fetchLength();
+        }, []);
+        
+    
+
+    useEffect(() => {
+        const socket = io('http://localhost:5000');
         socket.on('new-condition', (data) => {
             setNewCondition(prevConditions => {
                 const updatedConditions = [...prevConditions, data];
@@ -53,17 +81,21 @@ const Admin = () => {
             });
         });
         socket.on('unread-notifications', (data) => {
-            console.log('Received unseen notifications:', data);
-            setNewCondition(prevConditions => {
-                const updatedConditions = [...prevConditions, data];
-                localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
+          const code = data.map(eo => eo.message)
+        //   console.log( code)
+
+          setnewConditionnotSee(prevConditions => {
+                const updatedConditions = [...prevConditions, code];
+                // localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
+            // console.log(updatedConditions );
+
                 return updatedConditions;
             });
-            setNewConditionLength(prevLength => {
-                const updatedLength = prevLength + 1;
-                localStorage.setItem('newConditionLength', updatedLength.toString());
-                return updatedLength;
-            });
+            // setNewConditionLength(prevLength => {
+            //     const updatedLength = prevLength + 1;
+            //     // localStorage.setItem('newConditionLength', updatedLength.toString());
+            //     return updatedLength;
+            // });
             
             // افعل أي شيء آخر تحتاج إليه هنا
         });
@@ -71,11 +103,7 @@ const Admin = () => {
         return () => {
             socket.disconnect();
         };
-       
-        
-        
-        // يمكنك استقبال أي حدث آخر هنا
-        
+   
     }, []);
 
     const handleSearchInputChange = (event) => {
@@ -131,7 +159,7 @@ const Admin = () => {
                     />
                 </div>
             )}
-            {notices && <Notec lengthpro={newCondition.map(item => item.code)} />}
+            {notices && <Notec lengthpro={newCondition.map(item => item.code)} unseedata={newConditionnotSee[0]} />}
             {isLoading ? (
                 <div className="m-[40%] loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32 p-3">
                     <p className='p-3 m-3'>Loading</p>
@@ -150,7 +178,17 @@ const Admin = () => {
                         <tbody>
                             {filteredData.map((dataItem) => (
                                 <tr key={dataItem.code}>
-                                     <td className="border border-gray-800 px-4 py-2">{} قيد لانشاء</td>
+                                   <td className="border border-gray-800 px-4 py-2 text-[#000000]">
+                                   {length ? (
+        length.find(item => item.code === dataItem.code)?.conditionsLength < 1 ? 
+            0 : 
+            length.find(item => item.code === dataItem.code)?.conditionsLength
+    ) : (
+        0
+    )}
+    {lengthisLoading&& <div className="m-0 loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-[10px] w-[10px] p-3">
+                </div> }
+</td>
                                     <td className="border border-gray-800 px-4 py-2">{dataItem.email}</td>
                                     <td className="border border-gray-800 px-4 py-2">{dataItem.code}</td>
                                     <td className="border border-gray-800 px-4 py-2">

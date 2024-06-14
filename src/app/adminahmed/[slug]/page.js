@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-
+import {notFound} from "next/navigation"
 import { format } from 'date-fns';
 import ImageHoverEffect from '@/app/adminahmed/imageHover';
 
@@ -8,14 +8,17 @@ const TableAdmin = ({ params })=>{
 
     const [data, setData] = useState([]);
 
-    console.log(data.code)
-    console.log(params.slug)
+    // console.log(data.code)
+    // console.log(params.slug)
     const [isLoading, setIsLoading] = useState(true);
 
     const [selectedOptions, setSelectedOption] = useState({});
 
     const [sendreqIsfiled, setsendreqIsfiled] = useState({});
-
+    const [commition , setcommition] = useState({});
+    const [getcommition , setgetcommition] = useState([]);
+    console.log(getcommition)
+  
    // handle PUT fetch state 
    const handleUpdateStatus = async (id, code) => {
     try {
@@ -47,6 +50,50 @@ const TableAdmin = ({ params })=>{
 
 }
 
+  // handle PUT fetch state 
+  const handleGetCommition = async () => {
+    try {
+        const response = await fetch(`https://api-order-form.onrender.com/Commitionschma`);
+        const responseData = await response.json();
+        // console.log(responseData)
+        setgetcommition(responseData);
+    } catch (error) {
+        alert(`فشل في استلام البيانات: ${error.message}`);
+    }
+};
+
+
+const handleUpdateCommition = async (id) => {
+    try {
+        const commitionValue = commition[id];
+        if (!commitionValue) {
+            alert('الرجاء إدخال العمولة');
+            return;
+        }
+
+        const response = await fetch(`https://api-order-form.onrender.com/Commitionschma`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id, commition: commitionValue }) // إرسال البيانات كجسم JSON
+        });
+
+        if (response.ok) {
+            alert('تم ارسال الطلب');
+        } else {
+            const errorData = await response.json();
+            alert(`حدث خطأ أثناء إرسال البيانات: ${errorData.message || response.statusText}`);
+        }
+
+       
+    } catch (error) {
+        alert(`فشل في إرسال البيانات: ${error.message}`);
+    }
+}
+
+
+
 const handleOptionChange = async (event, id, code) => {
     setSelectedOption(prevOptions => ({
         ...prevOptions,
@@ -61,6 +108,7 @@ const handleOptionChange = async (event, id, code) => {
         [id]: event.target.value
     }));
 };
+
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,15 +116,18 @@ useEffect(() => {
         const responseData = await response.json();
         setData(responseData);
         setIsLoading(false);
-        console.log(responseData);
+
+        if(!responseData.ok){
+            notFound();
+        }
+        // console.log(responseData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchData();
+    handleGetCommition();
   }, [params]);
-
 
 
   if (isLoading) {
@@ -91,26 +142,28 @@ return(
             <th className="border border-gray-800 px-4 py-2">اسم العميل</th>
             <th className="border border-gray-800 px-4 py-2">رقم الهاتف</th>
             <th className="border border-gray-800 px-4 py-2">المحافظه</th>
-            <th className="border border-gray-800 px-4 py-2">العنوان</th>
+            <th className="border border-gray-800 px-4 py-2 max-w-[400px] min-w-[300px]">العنوان</th>
             <th className="border border-gray-800 px-4 py-2">اسم المنتج</th>
             <th className="border border-gray-800 px-4 py-2">سعر المنتج</th>
-            <th className="border border-gray-800 px-4 py-2">الكميه</th>
+            <th className="border border-gray-800 px-4 py-2 min-w-[30px] m-0 text-center">الكميه</th>
             <th className="border border-gray-800 px-4 py-2">الشحن</th>
-            <th className="border border-gray-800 px-4 py-2">العموله</th>
+            <th className="border border-gray-800 px-4 py-2 w-[30px]">العموله</th>
             <th className="border border-gray-800 px-4 py-2">اجمالي السعر</th>
             <th className="border border-gray-800 px-4 py-2">حالة الطلب</th> <th className="border border-gray-800 px-4 py-2">التاريخ </th>
             <th className="border border-gray-800 px-4 py-2">طلب العموله </th>
             <th className="border border-gray-800 px-4 py-2"> ملاحظه </th>
+            <th className="border border-gray-800 px-4 py-2"> عمولتنا </th>
             <th className="border border-gray-800 px-4 py-2">الصور</th>
         </tr>
     </thead>
     <tbody key={params.slug} >
-        {data.conditions.map((rowData, rowIndex) => (
+        {data.conditions ? data.conditions.map((rowData, rowIndex) => (
             <tr key={`${rowData._id}-${rowIndex}`} className={`${rowIndex % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}>
                 <td className="border border-gray-800 px-4 py-2">{rowData.clientname}</td>
                 <td className="border border-gray-800 px-4 py-2">{rowData.phone}</td>
-                <td className="border border-gray-800 px-4 py-2">{rowData.covernorate}</td>
-                <td className="border border-gray-800 px-4 py-2">{rowData.city}</td>
+                <td className="border border-gray-800 px-4 py-2 ">{rowData.covernorate}</td>
+                <td className="border border-gray-800 px-4 py-2 max-w-[400px] break-words">{rowData.city}</td>
+
                 <td className="border border-gray-800 px-4 py-2">{rowData.productname}</td>
                 <td className="border border-gray-800 px-4 py-2">{rowData.productprece}</td>
                 <td className="border border-gray-800 px-4 py-2">{rowData.quantity}</td>
@@ -144,14 +197,33 @@ return(
 
                         <button className=' bg-[#12e512df] p-2 rounded-2xl m-1' onClick={() => handleUpdateStatus(rowData._id, data.code)}>تحديث الحالة</button>
                     </div>
-
-
-
                 </td>
                 <td className="border border-gray-800 px-4 py-2">{format(rowData.timestamp, 'MM-dd   hh:mm a')}</td>
 
                 <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">{rowData.commitionreq}</td>
                 <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">{rowData.notes}</td>
+                <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">
+                <input
+    className='w-[100px] p-1 m-0 rounded-xl'
+    type='text'
+    placeholder='العموله'
+    onChange={(event) => {
+        const value = event.target.value;
+        setcommition(prevCommition => ({
+            ...prevCommition,
+            [rowData._id]: value
+        }));
+    }}
+    value={commition[rowData._id] !== undefined ? commition[rowData._id] : (getcommition.find(item => item.id === rowData._id)?.commition || "")}
+/>
+
+    <button className='bg-[#0bff27] p-1 m-2 rounded-2xl' onClick={() =>{
+handleUpdateCommition(rowData._id)
+    } 
+
+    }>حفظ</button>
+</td>
+
 
 
                 <td className="border border-gray-800 px-4 py-2">
@@ -168,7 +240,7 @@ return(
                     )}
                 </td>
             </tr>
-        ))}
+        )): <p className='text-center text-[#fff] fixed ml-[30%] w-[300px] y-[100px] text-[34px] bg-[#343244] p-6 mt-6'> لا يوجد طلبات </p>}
     </tbody>
 </table>
 </div>
