@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import {notFound} from "next/navigation"
 import { format } from 'date-fns';
 import ImageHoverEffect from '@/app/adminahmed/imageHover';
-
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 const TableAdmin = ({ params })=>{
 
     const [data, setData] = useState([]);
@@ -11,6 +11,7 @@ const TableAdmin = ({ params })=>{
     // console.log(data.code)
     // console.log(params.slug)
     const [isLoading, setIsLoading] = useState(true);
+    const [copyStatus, setcoby] = useState(false);
 
     const [selectedOptions, setSelectedOption] = useState({});
 
@@ -129,6 +130,13 @@ useEffect(() => {
     handleGetCommition();
   }, [params]);
 
+  const getTableRowContent = (rowData) => {
+    return `
+        ${rowData.clientname} \t ${rowData.phone} \t ${rowData.covernorate} \t ${rowData.city} \t
+        ${rowData.productname} \t ${rowData.productprece} \t ${rowData.quantity} \t ${rowData.productorder} \t
+        ${rowData.commition} \t ${rowData.total}
+    `;
+};
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -139,7 +147,8 @@ return(
 <table className="table-auto w-full border-collapse border border-gray-800">
     <thead>
         <tr className='text-[#32ff46] bg-[#433]' key={params.slug}>
-            <th className="border border-gray-800 px-4 py-2">اسم العميل</th>
+        <th className="border border-gray-800 px-4 py-2 min-w-[auto]" style={{ whiteSpace: 'nowrap' }}>النسخ  </th>
+            <th className="border border-gray-800 px-4 py-2 min-w-[auto]" style={{ whiteSpace: 'nowrap' }}>اسم العميل</th>
             <th className="border border-gray-800 px-4 py-2">رقم الهاتف</th>
             <th className="border border-gray-800 px-4 py-2">المحافظه</th>
             <th className="border border-gray-800 px-4 py-2 max-w-[400px] min-w-[300px]">العنوان</th>
@@ -149,9 +158,9 @@ return(
             <th className="border border-gray-800 px-4 py-2">الشحن</th>
             <th className="border border-gray-800 px-4 py-2 w-[30px]">العموله</th>
             <th className="border border-gray-800 px-4 py-2">اجمالي السعر</th>
-            <th className="border border-gray-800 px-4 py-2">حالة الطلب</th> <th className="border border-gray-800 px-4 py-2">التاريخ </th>
+            <th className="border border-gray-800 px-4 py-2">حالة الطلب</th> <th className="border border-gray-800 px-4 py-2" style={{ whiteSpace: 'nowrap' }}>التاريخ </th>
             <th className="border border-gray-800 px-4 py-2">طلب العموله </th>
-            <th className="border border-gray-800 px-4 py-2"> ملاحظه </th>
+            <th className="border border-gray-800 px-4 py-2 max-w-[200px] min-w-[200px]"> ملاحظه </th>
             <th className="border border-gray-800 px-4 py-2"> عمولتنا </th>
             <th className="border border-gray-800 px-4 py-2">الصور</th>
         </tr>
@@ -159,7 +168,12 @@ return(
     <tbody key={params.slug} >
         {data.conditions ? data.conditions.map((rowData, rowIndex) => (
             <tr key={`${rowData._id}-${rowIndex}`} className={`${rowIndex % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}>
-                <td className="border border-gray-800 px-4 py-2">{rowData.clientname}</td>
+                <CopyToClipboard text={getTableRowContent(rowData)}>
+        <button onClick={()=>{
+               setcoby({ ...copyStatus, [rowData._id]: true })
+        }} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded "> {copyStatus[rowData._id] ? "تم النسخ"  : "نسخ الطلب" }</button>
+      </CopyToClipboard>
+                <td className="border border-gray-800 px-4 py-2 w-auto" style={{ whiteSpace: 'nowrap' }}>{rowData.clientname}</td>
                 <td className="border border-gray-800 px-4 py-2">{rowData.phone}</td>
                 <td className="border border-gray-800 px-4 py-2 ">{rowData.covernorate}</td>
                 <td className="border border-gray-800 px-4 py-2 max-w-[400px] break-words">{rowData.city}</td>
@@ -198,7 +212,7 @@ return(
                         <button className=' bg-[#12e512df] p-2 rounded-2xl m-1' onClick={() => handleUpdateStatus(rowData._id, data.code)}>تحديث الحالة</button>
                     </div>
                 </td>
-                <td className="border border-gray-800 px-4 py-2">{format(rowData.timestamp, 'MM-dd   hh:mm a')}</td>
+                <td className="border border-gray-800 px-4 py-2" style={{ whiteSpace: 'nowrap' }}>{format(rowData.timestamp, `dd-MM & hh:mm a`)}</td>
 
                 <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">{rowData.commitionreq}</td>
                 <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">{rowData.notes}</td>
@@ -243,6 +257,7 @@ handleUpdateCommition(rowData._id)
         )): <p className='text-center text-[#fff] fixed ml-[30%] w-[300px] y-[100px] text-[34px] bg-[#343244] p-6 mt-6'> لا يوجد طلبات </p>}
     </tbody>
 </table>
+
 </div>
 
 )
