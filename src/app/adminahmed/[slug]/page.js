@@ -143,7 +143,7 @@ return(
             <th className="border border-gray-800 px-4 py-2">رقم الهاتف</th>
             <th className="border border-gray-800 px-4 py-2">المحافظه</th>
             <th className="border border-gray-800 px-4 py-2 max-w-[400px] min-w-[300px]">العنوان</th>
-            <th className="border border-gray-800 px-4 py-2">اسم المنتج</th>
+            <th className="border border-gray-800 px-4 py-2 max-w-[200px] min-w-[200px]">اسم المنتج</th>
             <th className="border border-gray-800 px-4 py-2">سعر المنتج</th>
             <th className="border border-gray-800 px-4 py-2 min-w-[30px] m-0 text-center">الكميه</th>
             <th className="border border-gray-800 px-4 py-2">الشحن</th>
@@ -164,7 +164,7 @@ return(
                 <td className="border border-gray-800 px-4 py-2 ">{rowData.covernorate}</td>
                 <td className="border border-gray-800 px-4 py-2 max-w-[400px] break-words">{rowData.city}</td>
 
-                <td className="border border-gray-800 px-4 py-2">{rowData.productname}</td>
+                <td className="border border-gray-800 px-4 py-2  max-w-[200px] break-words">{rowData.productname}</td>
                 <td className="border border-gray-800 px-4 py-2">{rowData.productprece}</td>
                 <td className="border border-gray-800 px-4 py-2">{rowData.quantity}</td>
                 <td className="border border-gray-800 px-4 py-2">{rowData.productorder}</td>
