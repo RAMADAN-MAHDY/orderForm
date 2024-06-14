@@ -130,7 +130,7 @@ const ConditionForm = () => {
     console.log(err)
   //https://api-order-form.onrender.com
     try {
-      const response = await fetch('http://localhost:5000/condition', {
+      const response = await fetch('https://api-order-form.onrender.com/condition', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
