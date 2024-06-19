@@ -130,6 +130,7 @@ const ConditionForm = () => {
     console.log(err)
   //https://api-order-form.onrender.com
     try {
+        //https://api-order-form.onrender.com
       const response = await fetch('https://api-order-form.onrender.com/condition', {
         method: 'POST',
         headers: {

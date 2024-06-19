@@ -51,7 +51,7 @@ const TableAdmin = ({ params })=>{
 
 }
 
-  // handle PUT fetch state 
+  // handle get fetch state 
   const handleGetCommition = async () => {
     try {
         const response = await fetch(`https://api-order-form.onrender.com/Commitionschma`);
@@ -213,7 +213,7 @@ return(
                 </td>
                 <td className="border border-gray-800 px-4 py-2" style={{ whiteSpace: 'nowrap' }}>{format(rowData.timestamp, `dd-MM & hh:mm a`)}</td>
 
-                <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">{rowData.commitionreq}</td>
+                <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">    طلب العموله {rowData.commitionreq}</td>
                 <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">{rowData.notes}</td>
                 <td className="border border-gray-800 px-4 py-2 text-[#ff3a3a]">
                 <input
