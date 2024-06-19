@@ -68,7 +68,7 @@ const DataComponent = ({ params }) => {
             alert(`حدث خطأ أثناء إرسال البيانات: ${errorData.message || response.statusText}`);
           }
        }else{
-        setError(' ملاحظه: يجب أن يكون من 11 رقم ويحتوي على أرقام فقط');
+        setError(' ملاحظه: يجب أن يتكون من 11 رقم ويحتوي على أرقام فقط');
        }
        
       } catch (error) {
@@ -146,7 +146,7 @@ const DataComponent = ({ params }) => {
                     <td className="border border-gray-800 px-4 py-2">{rowData.total}</td>
                     <td className="border border-gray-800 px-4 py-2">{rowData.state}</td>
                     {rowData.state === "تم التسليم"  &&  <td className="border border-gray-800 px-4 py-2"> 
-                    <button className={`bg-[#40d151] p-2 rounded-2xl hover:bg-[#2b8936] hover:text-[#fff] ${hiddenBut[rowData._id]&& "bg-[#000000]"}`} disabled={hiddenBut[rowData._id]}  onClick={()=>{
+                    <button className={`bg-[#40d151] p-2 rounded-2xl hover:bg-[#2b8936] hover:text-[#fff] ${hiddenBut[rowData._id]&&"bg-[#000000]"}`} disabled={hiddenBut[rowData._id]}  onClick={()=>{
                         handlecommitionreq(rowData._id)
                         setshowCashNumber(true)
                     }}>
