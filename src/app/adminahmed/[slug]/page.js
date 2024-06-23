@@ -144,7 +144,7 @@ const cancelEdit = () => {
         };
         fetchData();
         handleGetCommition();
-    }, [params]);
+    }, [params , isEditing2]);
 
 
     //get Table Row Content to copy
