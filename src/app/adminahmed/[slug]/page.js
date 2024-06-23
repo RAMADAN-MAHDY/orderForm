@@ -129,7 +129,7 @@ const cancelEdit = () => {
         const fetchData = async () => {
             try {
                 //https://api-order-form.onrender.com
-                const response = await fetch(`http://localhost:5000/condition/${params.slug}`);
+                const response = await fetch(`https://api-order-form.onrender.com/condition/${params.slug}`);
                 const responseData = await response.json();
                 setData(responseData);
                 setIsLoading(false);
