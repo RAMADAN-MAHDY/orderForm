@@ -205,7 +205,7 @@ const cancelEdit = () => {
                 />
             )}
         {/* رساله تنبيه لحذف الاوردر */}
-       {showMessage&& <div className='fixed text-[#ff0000] h-[200px] rounded-se-3xl mt-10 ml-[30%] bg-[#ffffff] w-[280px]'>
+       {showMessage&& <div className='fixed text-[#ff0000] h-[200px] rounded-se-3xl mt-10 md:ml-[30%] ml-[10%] bg-[#ffffff] w-[280px]'>
             <p className='text-[30px] mt-10 p-2'>
                     سيتم حذف الطلب نهائيا 
             </p>
