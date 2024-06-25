@@ -127,10 +127,10 @@ const ConditionForm = ({product , code , onCancel}) => {
         return;
     }
 
-    console.log(requestData)
-    console.log(product._id)
+    // console.log(requestData)
+    // console.log(product._id)
 
-
+    // https://api-order-form.onrender.com 
     const response = await fetch(`https://api-order-form.onrender.com/update/${product._id}/${code}`, {
         method: 'PUT',
         headers: {

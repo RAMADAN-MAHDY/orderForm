@@ -22,7 +22,10 @@ const TableAdmin = ({ params }) => {
     const [sendreqIsfiled, setsendreqIsfiled] = useState({});
     const [commition, setcommition] = useState({});
     const [getcommition, setgetcommition] = useState([]);
-    // console.log(getcommition)
+    const [idOrder, setidOrder] = useState();
+    const [refreshdata, setrefreshdata] = useState(false);
+    const [showMessage, setshowMessage] = useState(false);
+    // console.log(idOrder)
 
     // handle PUT fetch state 
     const handleUpdateStatus = async (id, code) => {
@@ -42,6 +45,8 @@ const TableAdmin = ({ params }) => {
             });
             if (response.ok) {
                 alert('تم ارسال الطلب');
+               setrefreshdata(!refreshdata);
+
 
 
             } else {
@@ -54,7 +59,33 @@ const TableAdmin = ({ params }) => {
 
 
     }
+   // hndle delete data by ic and code 
+   const handleDeleteOrder = async (id) => {
+    // console.log(idOrder)
+    // console.log(params.slug)
 
+    try {
+        const response = await fetch(`https://api-order-form.onrender.com/item/${params.slug}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        if (response.ok) {
+            alert(' تم الحذف  ');
+            setrefreshdata(!refreshdata)
+            setshowMessage(false)
+
+        } else {
+            const errorData = await response.json();
+            alert(`حدث خطأ أثناء إرسال البيانات: ${errorData.message || response.statusText}`);
+        }
+    } catch (error) {
+        alert(`فشل في إرسال البيانات: ${error.message}`);
+    }
+
+
+}
     // handle get fetch state 
     const handleGetCommition = async () => {
         try {
@@ -69,7 +100,7 @@ const TableAdmin = ({ params }) => {
 
 // دالة لإغلاق نموذج التعديل
 const cancelEdit = () => {
-    setIsEditing(false);
+    setIsEditing(!isEditing);
     setSelectedProduct(null);
 };
 
@@ -91,6 +122,8 @@ const cancelEdit = () => {
 
             if (response.ok) {
                 alert('تم ارسال الطلب');
+            setrefreshdata(!refreshdata);
+
             } else {
                 const errorData = await response.json();
                 alert(`حدث خطأ أثناء إرسال البيانات: ${errorData.message || response.statusText}`);
@@ -144,7 +177,7 @@ const cancelEdit = () => {
         };
         fetchData();
         handleGetCommition();
-    }, [params , !isEditing ]);
+    }, [params , isEditing , refreshdata]);
 
 
     //get Table Row Content to copy
@@ -171,7 +204,17 @@ const cancelEdit = () => {
                     onCancel={cancelEdit} // دالة لإلغاء التعديل
                 />
             )}
-
+        {/* رساله تنبيه لحذف الاوردر */}
+       {showMessage&& <div className='fixed text-[#ff0000] h-[200px] rounded-se-3xl mt-10 ml-[30%] bg-[#ffffff] w-[260px]'>
+            <p className='text-[30px] mt-10 p-2'>
+                    سيتم حذف الطلب نهائيا 
+            </p>
+            <button className='text-[30px] bg-[#ff0000] text-[#fff] rounded-3xl p-3 mt-[27px]' onClick={()=>{
+             handleDeleteOrder(idOrder);
+            }}>
+                                        تأكيد
+            </button>
+        </div> }
         <div className="overflow-x-auto ">
             <table className="table-auto w-full border-collapse border border-gray-800">
                 <thead>
@@ -207,6 +250,12 @@ const cancelEdit = () => {
     toggleEdit(rowData._id ,rowData)
 }}>
         {isEditing[rowData._id] ? 'Cancel' : 'تعديل'}
+      </button>
+      <button className='p-2 m-1 bg-[#054ffafc] rounded-2xl ' onClick={()=>{
+   setidOrder(rowData._id)
+   setshowMessage(true)
+}}>
+       حذف
       </button>
                             <td className="border border-gray-800 px-4 py-2 w-auto" style={{ whiteSpace: 'nowrap' }}>{rowData.clientname}</td>
                             <td className="border border-gray-800 px-4 py-2">{rowData.phone}</td>
