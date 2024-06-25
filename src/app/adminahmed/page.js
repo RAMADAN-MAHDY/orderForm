@@ -33,7 +33,7 @@ const Admin = () => {
         const fetchData = async () => {
             try {
                 //https://api-order-form.onrender.com
-                const response = await fetch('http://localhost:5000/user');
+                const response = await fetch('https://api-order-form.onrender.com/user');
                 const responseData = await response.json();
                 setData(responseData);
                 setIsLoading(false);
