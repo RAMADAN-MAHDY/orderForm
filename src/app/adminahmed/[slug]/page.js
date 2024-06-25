@@ -214,6 +214,11 @@ const cancelEdit = () => {
             }}>
                                         تأكيد
             </button>
+            <button className='text-[30px] bg-[rgb(0,30,255)] text-[#fdfcff] rounded-3xl p-3 mt-[27px]  ml-[110px]' onClick={()=>{
+            setshowMessage(!showMessage);
+            }}>
+                                        الغاء
+            </button>
         </div> }
         <div className="overflow-x-auto ">
             <table className="table-auto w-full border-collapse border border-gray-800">
@@ -243,7 +248,7 @@ const cancelEdit = () => {
                             <CopyToClipboard text={getTableRowContent(rowData)}>
                                 <button onClick={() => {
                                     setcoby({ ...copyStatus, [rowData._id]: true })
-                                }} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded "> {copyStatus[rowData._id] ? "تم " : "نسخ "}</button>
+                                }} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded "> {copyStatus[rowData._id] ? "تم " : "نسخ "}</button>
                             </CopyToClipboard>
                             
 <button className='p-2 m-1 bg-[#054ffafc] rounded-2xl ' onClick={()=>{
@@ -251,7 +256,7 @@ const cancelEdit = () => {
 }}>
         {isEditing[rowData._id] ? 'Cancel' : 'تعديل'}
       </button>
-      <button className='p-2 m-1 bg-[#054ffafc] rounded-2xl ' onClick={()=>{
+      <button className='p-2 m-1 bg-[#fa0505fc] rounded-2xl text-[#fff] ' onClick={()=>{
    setidOrder(rowData._id)
    setshowMessage(true)
 }}>
