@@ -33,7 +33,7 @@ const Admin = () => {
         const fetchData = async () => {
             try {
                 //https://api-order-form.onrender.com
-                const response = await fetch('https://api-order-form.onrender.com/user');
+                const response = await fetch('https://api-order-form.vercel.app/user');
                 const responseData = await response.json();
                 setData(responseData);
                 setIsLoading(false);
@@ -48,7 +48,7 @@ const Admin = () => {
     useEffect(() => {
         const fetchLength = async () => {
             try {
-                const response = await fetch('https://api-order-form.onrender.com/lengthoforder');
+                const response = await fetch('https://api-order-form.vercel.app/lengthoforder');
                 setLengthIsLoading(false);
                 if (!response.ok) {
                     throw new Error('Failed to fetch length');

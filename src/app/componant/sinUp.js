@@ -37,7 +37,7 @@ const SignUpComponent = () => {
 
     // إرسال بيانات التسجيل إلى الخادم
     try{
-        const response = await fetch('https://api-order-form.onrender.com/user', {
+        const response = await fetch('https://api-order-form.vercel.app/user', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

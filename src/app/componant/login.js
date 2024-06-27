@@ -25,7 +25,7 @@ function LoginForm({ onSignInSuccess }) {
         event.preventDefault();
         setIsLoading(true);
         try {
-            const response = await fetch("https://api-order-form.onrender.com/login", {
+            const response = await fetch("https://api-order-form.vercel.app/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

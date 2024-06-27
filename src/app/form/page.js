@@ -131,7 +131,7 @@ const ConditionForm = () => {
   //https://api-order-form.onrender.com
     try {
         //https://api-order-form.onrender.com
-      const response = await fetch('https://api-order-form.onrender.com/condition', {
+      const response = await fetch('https://api-order-form.vercel.app/condition', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

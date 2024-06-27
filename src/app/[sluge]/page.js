@@ -47,7 +47,7 @@ const DataComponent = ({ params }) => {
     const isValid = /^[0-9]{11}$/.test(commitionreq);
 
        if(isValid){
-        const response = await fetch(`https://api-order-form.onrender.com/condition/${data.code}/${id}`, {
+        const response = await fetch(`https://api-order-form.vercel.app/condition/${data.code}/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ const DataComponent = ({ params }) => {
     const fetchData = async () => {
       try {
         //https://api-order-form.onrender.com
-        const response = await fetch(`https://api-order-form.onrender.com/condition/${params.sluge}`);
+        const response = await fetch(`https://api-order-form.vercel.app/condition/${params.sluge}`);
         const responseData = await response.json();
         setData(responseData);
         setIsLoading(false);

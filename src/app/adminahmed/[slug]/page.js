@@ -36,7 +36,7 @@ const TableAdmin = ({ params }) => {
             } else { state = Object.values(selectedOptions[id]).join("") }
 
             console.log(state)
-            const response = await fetch(`https://api-order-form.onrender.com/condition/state/${code}/${id}`, {
+            const response = await fetch(`https://api-order-form.vercel.app/condition/state/${code}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ const TableAdmin = ({ params }) => {
     // console.log(params.slug)
 
     try {
-        const response = await fetch(`https://api-order-form.onrender.com/item/${params.slug}/${id}`, {
+        const response = await fetch(`https://api-order-form.vercel.app/item/${params.slug}/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ const TableAdmin = ({ params }) => {
     // handle get fetch state 
     const handleGetCommition = async () => {
         try {
-            const response = await fetch(`https://api-order-form.onrender.com/Commitionschma`);
+            const response = await fetch(`https://api-order-form.vercel.app/Commitionschma`);
             const responseData = await response.json();
             // console.log(responseData)
             setgetcommition(responseData);
@@ -112,7 +112,7 @@ const cancelEdit = () => {
                 alert('الرجاء إدخال العمولة');
                 return;
             }
-            const response = await fetch(`https://api-order-form.onrender.com/Commitionschma`, {
+            const response = await fetch(`https://api-order-form.vercel.app/Commitionschma`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -162,7 +162,7 @@ const cancelEdit = () => {
         const fetchData = async () => {
             try {
                 //https://api-order-form.onrender.com
-                const response = await fetch(`https://api-order-form.onrender.com/condition/${params.slug}`);
+                const response = await fetch(`https://api-order-form.vercel.app/condition/${params.slug}`);
                 const responseData = await response.json();
                 setData(responseData);
                 setIsLoading(false);
