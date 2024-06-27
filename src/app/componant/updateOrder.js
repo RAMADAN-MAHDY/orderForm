@@ -146,6 +146,7 @@ const ConditionForm = ({product , code , onCancel}) => {
       const data = await response.json();
       console.log(data);
       alert('Data updated successfully');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } 
 catch (error) {
     alert(`فشل في إرسال البيانات: ${error.message}`);
