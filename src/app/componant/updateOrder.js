@@ -131,7 +131,7 @@ const ConditionForm = ({product , code , onCancel}) => {
     // console.log(product._id)
 
     // https://api-order-form.onrender.com 
-    const response = await fetch(`https://api-order-form.onrender.com/update/${product._id}/${code}`, {
+    const response = await fetch(`https://api-order-form.vercel.app/update/${product._id}/${code}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
