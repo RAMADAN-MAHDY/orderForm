@@ -129,7 +129,7 @@ const Admin = () => {
         <div dir='rtl'>
             <div className='flex justify-between'>
                 <input
-                    className='p-3 rounded-3xl m-3 sm:w-[200px] w-[100px] h-[30px] left-0'
+                    className='p-3 rounded-3xl mt-3 sm:w-[200px] w-[100px] h-[30px] left-0'
                     type="text"
                     placeholder="ابحث بالكود أو الاسم"
                     value={searchInput}
