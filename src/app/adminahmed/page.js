@@ -136,7 +136,7 @@ const Admin = () => {
                     onChange={handleSearchInputChange}
                 />
                 <h1 className='text-[#ffffff] sm:h-[50px] h-[40px] mb-3 sm:text-[24px] p-1 bg-[#c5c5c1] shadow-[0_35px_35px_rgba(3,3,3,1.25)]'> بسم الله الرحمن الرحيم</h1>
-                <div className="mb-3 h-[60px] self-center border border-gray-400 rounded-lg p-4 group hover:bg-white bg-gradient-to-br from-red-500 to-blue-500 via-green-500">
+                <div className="mb-3 h-[60px] self-center border border-gray-400 rounded-lg sm:p-4 pt-4 group hover:bg-white bg-gradient-to-br from-red-500 to-blue-500 via-green-500">
                     <span className="h-[60px] bg-clip-text bg-gradient-to-br from-red-500 to-blue-500 via-green-500 text-[#fff] hover:text-white animate-pulse">
                         Royal corner
                     </span>
