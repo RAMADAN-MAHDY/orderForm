@@ -252,7 +252,8 @@ const cancelEdit = () => {
                             </CopyToClipboard>
                             
 <button className='p-2 m-1 bg-[#054ffafc] rounded-2xl ' onClick={()=>{
-    toggleEdit(rowData._id ,rowData)
+    toggleEdit(rowData._id ,rowData);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }}>
         {isEditing[rowData._id] ? 'Cancel' : 'تعديل'}
       </button>
