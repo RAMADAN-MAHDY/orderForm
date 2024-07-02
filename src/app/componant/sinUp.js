@@ -1,12 +1,13 @@
 'use client'
 import React, { useState } from 'react';
 
-const SignUpComponent = () => {
+const SignUpComponent = ({onSignin}) => {
   const [email, setEmail] = useState('');
   const [code, setcode] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setloading] = useState("انشاء حساب");
 
   const handleSignUp = async(e) => {
    
@@ -20,7 +21,7 @@ const SignUpComponent = () => {
 
     // التحقق من قوة كلمة المرور
     if (password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError(' كلمة السر يجب ان تكون اكثر من 6 ارقام او احرف');
       return;
     }
 
@@ -30,11 +31,15 @@ const SignUpComponent = () => {
     // }
 
     // التحقق من تطابق كلمتي المرور
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    if (password !== confirmPassword ) {
+      setError('كلمه السر غير متطابقه');
       return;
     }
-
+    if (!email ||!code ) {
+        setError('تاكد من ادخال الاسم والكود');
+        return;
+      }
+    setloading("جاري انشاء الحساب")
     // إرسال بيانات التسجيل إلى الخادم
     try{
         const response = await fetch('https://api-order-form.vercel.app/user', {
@@ -45,6 +50,7 @@ const SignUpComponent = () => {
             body: JSON.stringify({ email, password ,code}),
           })
           if (!response.ok) {
+            setloading("انشاء الحساب")
             throw new Error('Failed to sign up');
           }
     // إعادة تعيين الحقول بعد التسجيل
@@ -53,10 +59,12 @@ const SignUpComponent = () => {
     setPassword('');
     setConfirmPassword('');
     setError('');
-
+    setloading("تم انشاء الحساب ")
     alert('تم انشاء حسابك بنجاح')
     }catch(err){
         console.error(err.message);
+        setloading("انشاء الحساب")
+
         setError('An error occurred. Please try again later.');
 
     }
@@ -65,9 +73,9 @@ const SignUpComponent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-      <div className="bg-white p-8 rounded shadow-md w-80">
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+    // <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+      <div className="bg-white p-8 rounded shadow-md w-80 ml-[10%] lg:ml-[20%] ">
+        <h2 className="text-2xl font-bold mb-4 text-center">انشاء حساب </h2>
         <input
         required
           type="text"
@@ -79,7 +87,7 @@ const SignUpComponent = () => {
         <input
         required
           type="password"
-          placeholder="Password"
+          placeholder="كلمه السر"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded mb-4"
@@ -87,7 +95,7 @@ const SignUpComponent = () => {
         <input
         required
           type="password"
-          placeholder="Confirm Password"
+          placeholder="تاكيد كلمة السر "
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded mb-4"
@@ -95,7 +103,7 @@ const SignUpComponent = () => {
           <input
           required
           type="number"
-          placeholder="code"
+          placeholder="الكود"
           value={code}
           onChange={(e) => setcode(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded mb-4"
@@ -104,11 +112,19 @@ const SignUpComponent = () => {
           onClick={handleSignUp}
           className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
         >
-          Sign Up
+           {loading}
+        </button>
+        <button
+          onClick={()=>{
+            onSignin()
+          }}
+          className="w-full mt-2 bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+        >
+          تسجيل الدخول
         </button>
         {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
-    </div>
+    // </div>
   );
 };
 

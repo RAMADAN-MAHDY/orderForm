@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-function LoginForm({ onSignInSuccess }) {
+function LoginForm({ onSignInSuccess , onSignUp }) {
     const [email, setEmail] = useState( typeof window !== 'undefined' ?localStorage.getItem('emailorderform') || '':'');
      const [code, setcodel] = useState( typeof window !== 'undefined' ?localStorage.getItem('codeorderform') || '':'');
     const [password, setPassword] = useState('');
@@ -53,6 +53,7 @@ function LoginForm({ onSignInSuccess }) {
 
     return (
         <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h2 className='text-[24px] font-bold text-center'>تسجيل الدخول</h2>
             <div className="mb-4">
                 <label htmlFor="email" className={`block ${go === true ? "text-[#449029]" : "text-gray-700"} text-sm font-bold mb-2`}> اسم المستخدم</label>
                 <input
@@ -94,6 +95,10 @@ function LoginForm({ onSignInSuccess }) {
     ) : (
         <button type="submit" className={`${go === true ? "bg-green-500" : "bg-blue-500"} hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}>تسجيل الدخول</button>
     )}
+
+<button type='button' onClick={()=>{
+onSignUp()
+}} className={` bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}> انشاء حساب</button>
             </div>
         </form>
     );

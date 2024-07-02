@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import * as d3 from 'd3';
 const DataComponent = ({ params }) => {
-  console.log(params.sluge);
+//   console.log(params.sluge);
   const [showCashNumber , setshowCashNumber ] = useState(false) 
   const [data, setData] = useState(null);
   const [commitionreq, setcommitionreq] = useState();

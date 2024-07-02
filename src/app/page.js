@@ -13,18 +13,30 @@ export default function Home() {
         setUserEmail(email);
         setUsercode(code);
       };
+      const [showsignup , setshowsignup] = useState(false)// shwo sign up     and   shwo sign in
+      console.log(showsignup)
+
       const removeNumbers = (str) => {
         return str.replace(/\d/g, '');
     }
-      console.log(userEmail)
-      console.log(usercode)
+    //   console.log(userEmail)
+    //   console.log(usercode)
       const [showChild, setShowChild] = useState(false)
 
       useEffect(() => {
         setShowChild(true)
+
       }, [])
 
+      // shwo sign up     and   shwo sign in
+    const handleShowSignUp = ()=>{
+        setshowsignup(!showsignup)
+    }
       
+
+
+
+
   if (!showChild) {
     return null
   }
@@ -78,8 +90,9 @@ export default function Home() {
         </>
       ) : (
         <>
-         <LoginForm onSignInSuccess={handleSignInSuccess} />
-        <SignUpComponent/>
+        {!showsignup? <LoginForm onSignInSuccess={handleSignInSuccess} onSignUp={handleShowSignUp} />  : <SignUpComponent onSignin={handleShowSignUp}/> }
+         
+        
         </>
        
       )}
