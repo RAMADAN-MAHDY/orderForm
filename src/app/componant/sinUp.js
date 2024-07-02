@@ -7,7 +7,7 @@ const SignUpComponent = ({onSignin}) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setloading] = useState("انشاء حساب");
+  const [loading, setloading] = useState("تأكيد انشاء الحساب ");
 
   const handleSignUp = async(e) => {
    
@@ -50,7 +50,7 @@ const SignUpComponent = ({onSignin}) => {
             body: JSON.stringify({ email, password ,code}),
           })
           if (!response.ok) {
-            setloading("انشاء الحساب")
+            setloading("تأكيد انشاء الحساب ")
             throw new Error('Failed to sign up');
           }
     // إعادة تعيين الحقول بعد التسجيل
@@ -63,7 +63,7 @@ const SignUpComponent = ({onSignin}) => {
     alert('تم انشاء حسابك بنجاح')
     }catch(err){
         console.error(err.message);
-        setloading("انشاء الحساب")
+        setloading("تأكيد انشاء الحساب ")
 
         setError('An error occurred. Please try again later.');
 
