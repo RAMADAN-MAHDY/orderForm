@@ -49,7 +49,7 @@ const LogoModal = ({ clientname ,getCodeBYClientName ,setclientname ,handleGetCo
               onClick={()=>{
                 closeModal();
                 setclientname('');
-                setgetCodeBYClientName('')
+                setgetCodeBYClientName("")
             }
               }>
               إغلاق

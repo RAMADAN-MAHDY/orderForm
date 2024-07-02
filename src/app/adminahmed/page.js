@@ -25,7 +25,11 @@ const Admin = () => {
     const handleGetCodeByClientname = async () => {
         try {
             //https://api-order-form.vercel.app
-            const response = await fetch(`https://api-order-form.vercel.app/search/${clientname}`, {
+
+            const encodedClientname = encodeURIComponent(clientname.trim());
+        console.log(encodedClientname);
+
+            const response = await fetch(`https://api-order-form.vercel.app/search/${encodedClientname}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
