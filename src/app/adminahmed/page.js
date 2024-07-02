@@ -1,6 +1,8 @@
 'use client';
 import { useState, useEffect, useMemo } from 'react';
+import LogoModal from "@/app/componant/Pop-up";
 import { AiFillFrown, AiFillSmile } from "react-icons/ai";
+// import { FaSearch } from 'react-icons/fa';
 import Notec from '@/app/componant/notec';
 import io from 'socket.io-client';
 import Link from 'next/link';
@@ -14,10 +16,40 @@ const Admin = () => {
     const [newCondition, setNewCondition] = useState([]);
     const [newConditionnotSee, setnewConditionnotSee] = useState([]);
     const [newConditionLength, setNewConditionLength] = useState(0);
+    const [clientname,setclientname] = useState()
+    const [getCodeBYClientName ,setgetCodeBYClientName] = useState()
     const [notices, setNotices] = useState(false);
 
+    // console.log(getCodeBYClientName);
+
+    const handleGetCodeByClientname = async () => {
+        try {
+            const response = await fetch(`https://api-order-form.vercel.app/search/${clientname}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ }),
+            });
+      
+            if (response.ok) {
+                const data = await response.json();
+                const code = Object.keys(data)
+                console.log(data[code]); 
+                 setgetCodeBYClientName(data[code]); 
+            } else {
+                throw new Error('Failed to fetch data'); 
+            }
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        } finally {
+          
+        }
+    };
+    
+    // console.log(clientname)
     // console.log(newCondition)
-    console.log(length)
+    // console.log(length)
     // console.log(newConditionnotSee[0])
     // console.log(newConditionnotSee)
     useEffect(() => {
@@ -160,6 +192,29 @@ const Admin = () => {
                     />
                 </div>
             )}
+            
+
+{/* احضار الكود اللي بداخله اسم العميل  */}
+{/* <div className='flex flex-row border-[red] border-[2px] p-2 m-3 '>
+
+<input
+                    className='p-3 rounded-3xl mt-3 sm:w-[200px] w-[200px] h-[30px] left-0'
+                    type="text"
+                    placeholder="البحث بأسم العميل  "
+                    value={clientname}
+                    onChange={(event)=>{
+                        setclientname(event.target.value)
+                    }}
+                />
+                <button className='h-[30px] bg-[#ffffffee] rounded-3xl mt-3'>
+ <AiOutlineSearch className='w-11 text-[30px] text-[#033afe] '/>
+
+                </button>
+</div> */}
+
+<LogoModal clientname={clientname} getCodeBYClientName={getCodeBYClientName} setclientname={setclientname} handleGetCodeByClientname={handleGetCodeByClientname} />
+
+
             {notices && <Notec lengthpro={newCondition.map(item => item.code)} unseedata={newConditionnotSee[0]} />}
             {isLoading ? (
                 <div className="m-[40%] loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32 p-3">
