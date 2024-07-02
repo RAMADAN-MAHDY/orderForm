@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import {AiOutlineSearch} from "react-icons/ai";
-const LogoModal = ({ clientname ,getCodeBYClientName ,setclientname ,handleGetCodeByClientname}) => {
+const LogoModal = ({ clientname ,getCodeBYClientName ,setclientname ,handleGetCodeByClientname ,setgetCodeBYClientName}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -46,8 +46,12 @@ const LogoModal = ({ clientname ,getCodeBYClientName ,setclientname ,handleGetCo
 
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={closeModal}
-            >
+              onClick={()=>{
+                closeModal();
+                setclientname('');
+                setgetCodeBYClientName('')
+            }
+              }>
               إغلاق
             </button>
           </div>

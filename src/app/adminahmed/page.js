@@ -24,6 +24,7 @@ const Admin = () => {
 
     const handleGetCodeByClientname = async () => {
         try {
+            //https://api-order-form.vercel.app
             const response = await fetch(`https://api-order-form.vercel.app/search/${clientname}`, {
                 method: "POST",
                 headers: {
@@ -37,6 +38,7 @@ const Admin = () => {
                 const code = Object.keys(data)
                 console.log(data[code]); 
                  setgetCodeBYClientName(data[code]); 
+                 setSearchInput(data[code])
             } else {
                 throw new Error('Failed to fetch data'); 
             }
@@ -64,7 +66,7 @@ const Admin = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                //https://api-order-form.onrender.com
+                //https://api-order-form.vercel.app
                 const response = await fetch('https://api-order-form.vercel.app/user');
                 const responseData = await response.json();
                 setData(responseData);
@@ -212,7 +214,7 @@ const Admin = () => {
                 </button>
 </div> */}
 
-<LogoModal clientname={clientname} getCodeBYClientName={getCodeBYClientName} setclientname={setclientname} handleGetCodeByClientname={handleGetCodeByClientname} />
+<LogoModal clientname={clientname} getCodeBYClientName={getCodeBYClientName} setclientname={setclientname} handleGetCodeByClientname={handleGetCodeByClientname} setgetCodeBYClientName={setgetCodeBYClientName}/>
 
 
             {notices && <Notec lengthpro={newCondition.map(item => item.code)} unseedata={newConditionnotSee[0]} />}
