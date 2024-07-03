@@ -4,8 +4,13 @@ import LoginForm from '@/app/componant/login';
 import SignUpComponent from '@/app/componant/sinUp';
 import { useState,useEffect } from 'react';
 import Link from 'next/link';
+import { Amiri , Scheherazade_New ,Cairo , El_Messiri ,Lateef ,Markazi_Text ,Mirza , Tajawal ,Vazirmatn , Reem_Kufi ,Harmattan , Alkalami} from 'next/font/google';
 // import io from 'socket.io-client';
-
+const amiri = Alkalami   ({
+    weight: ['400'],
+    subsets: ['arabic'],
+  });
+  
 export default function Home() {
     const [userEmail, setUserEmail] = useState( typeof window !== 'undefined' ?localStorage.getItem('emailorderform') || '' : '');
     const [usercode, setUsercode] = useState( typeof window !== 'undefined' ?localStorage.getItem('codeorderform') || '':'');
@@ -45,7 +50,7 @@ export default function Home() {
 
     <main className="flex min-h-screen flex-col items-center  pt-6">
        
-      <h1 className='text-[#ffffff] mb-3 text-[24px] p-1 bg-[#c5c5c1] shadow-[0_35px_35px_rgba(3,3,3,1.25)]'> بسم الله الرحمن الرحيم</h1> 
+      <h1 className={`text-[#7f9a04] mb-3 text-[24px] p-1 bg-[#c5c5c1] shadow-[0_35px_35px_rgba(3,3,3,1.25)] ${amiri.className}`}> بسم الله الرحمن الرحيم</h1> 
       <dev className='flex justify-between '>
      
    
