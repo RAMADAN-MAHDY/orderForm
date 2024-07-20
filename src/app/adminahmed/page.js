@@ -5,7 +5,7 @@ import { AiFillFrown, AiFillSmile } from "react-icons/ai";
 import { Alkalami } from 'next/font/google';
 // import { FaSearch } from 'react-icons/fa';
 import Notec from '@/app/componant/notec';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import Link from 'next/link';
 
 const alkalami = Alkalami   ({
@@ -112,45 +112,45 @@ const Admin = () => {
         
     
 
-    useEffect(() => {
-        const socket = io('http://localhost:5000');
-        socket.on('new-condition', (data) => {
-            setNewCondition(prevConditions => {
-                const updatedConditions = [...prevConditions, data];
-                localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
-                return updatedConditions;
-            });
-            setNewConditionLength(prevLength => {
-                const updatedLength = prevLength + 1;
-                localStorage.setItem('newConditionLength', updatedLength.toString());
-                return updatedLength;
-            });
-        });
-        socket.on('unread-notifications', (data) => {
-          const code = data.map(eo => eo.message)
-        //   console.log( code)
+    // useEffect(() => {
+    //     const socket = io('http://localhost:5000');
+    //     socket.on('new-condition', (data) => {
+    //         setNewCondition(prevConditions => {
+    //             const updatedConditions = [...prevConditions, data];
+    //             localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
+    //             return updatedConditions;
+    //         });
+    //         setNewConditionLength(prevLength => {
+    //             const updatedLength = prevLength + 1;
+    //             localStorage.setItem('newConditionLength', updatedLength.toString());
+    //             return updatedLength;
+    //         });
+    //     });
+    //     socket.on('unread-notifications', (data) => {
+    //       const code = data.map(eo => eo.message)
+    //     //   console.log( code)
 
-          setnewConditionnotSee(prevConditions => {
-                const updatedConditions = [...prevConditions, code];
-                // localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
-            // console.log(updatedConditions );
+    //       setnewConditionnotSee(prevConditions => {
+    //             const updatedConditions = [...prevConditions, code];
+    //             // localStorage.setItem('newCondition', JSON.stringify(updatedConditions));
+    //         // console.log(updatedConditions );
 
-                return updatedConditions;
-            });
-            // setNewConditionLength(prevLength => {
-            //     const updatedLength = prevLength + 1;
-            //     // localStorage.setItem('newConditionLength', updatedLength.toString());
-            //     return updatedLength;
-            // });
+    //             return updatedConditions;
+    //         });
+    //         // setNewConditionLength(prevLength => {
+    //         //     const updatedLength = prevLength + 1;
+    //         //     // localStorage.setItem('newConditionLength', updatedLength.toString());
+    //         //     return updatedLength;
+    //         // });
             
-            // افعل أي شيء آخر تحتاج إليه هنا
-        });
+    //         // افعل أي شيء آخر تحتاج إليه هنا
+    //     });
 
-        return () => {
-            socket.disconnect();
-        };
+    //     return () => {
+    //         socket.disconnect();
+    //     };
    
-    }, []);
+    // }, []);
 
     const handleSearchInputChange = (event) => {
         setSearchInput(event.target.value);
