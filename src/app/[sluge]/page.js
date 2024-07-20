@@ -47,7 +47,7 @@ const DataComponent = ({ params }) => {
     const isValid = /^[0-9]{11}$/.test(commitionreq);
 
        if(isValid){
-        const response = await fetch(`https://api-order-form.vercel.app/condition/${data.code}/${id}`, {
+        const response = await fetch(`https://api-order-form.vercel.app/condition/${params.sluge}/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -110,8 +110,8 @@ const DataComponent = ({ params }) => {
 </span>
 </div>
         <Link className='bg-[#88bbd1e4] p-3 rounded-xl hover:bg-[#1ebcffd3]' href={'/'}>الصفحه الرئيسيه</Link>
-          <p className='bg-[#dad1d1] p-6 '>Name: {data.name}</p>
-          <p className='bg-[#dad1d1] p-6 '>Code: {data.code}</p>
+          <p className='bg-[#dad1d1] p-6 '>Name: {data[0].name}</p>
+          <p className='bg-[#dad1d1] p-6 '>Code: {data[0].code}</p>
           <div className="overflow-x-auto">
             <table className="table-auto w-full border-collapse border border-gray-800 -z-0">
               <thead>
