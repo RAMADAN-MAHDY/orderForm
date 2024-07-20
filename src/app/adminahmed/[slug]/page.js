@@ -11,16 +11,7 @@ const TableAdmin = ({ params }) => {
 
     const [data, setData] = useState([]);
 
-    console.log(data.code)
-    console.log('---------------------------------====================--')
-
-    console.log(data)
-    console.log('---------------------------------====================--')
-
-    console.log(data.conditions)
-    console.log('---------------------------------====================--')
-
-
+    // console.log(data.code)
     // console.log(params.slug)
     const [isLoading, setIsLoading] = useState(true);
     const [copyStatus, setcoby] = useState(false);
@@ -179,9 +170,7 @@ const cancelEdit = () => {
                 if (!responseData.ok) {
                     notFound();
                 }
-                console.log("888888888888888888888888888");
-
-                console.log(responseData);
+                // console.log(responseData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -254,7 +243,9 @@ const cancelEdit = () => {
                     </tr>
                 </thead>
                 <tbody key={params.slug} >
-                    {data.conditions ? data.conditions.map((rowData, rowIndex) => (
+                    {data ?
+                    data.map((item, index) =>
+                        item.conditions.map((rowData, rowIndex) => (
                         <tr key={`${rowData._id}-${rowIndex}`} className={`${rowIndex % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}>
                             <CopyToClipboard text={getTableRowContent(rowData)}>
                                 <button onClick={() => {
@@ -353,7 +344,7 @@ const cancelEdit = () => {
                                 )}
                             </td>
                         </tr>
-                    )) : <p className='text-center text-[#fff] fixed ml-[30%] w-[300px] y-[100px] text-[34px] bg-[#343244] p-6 mt-6'> لا يوجد طلبات </p>}
+                    ))) : <p className='text-center text-[#fff] fixed ml-[30%] w-[300px] y-[100px] text-[34px] bg-[#343244] p-6 mt-6'> لا يوجد طلبات </p>}
                 </tbody>
             </table>
           
