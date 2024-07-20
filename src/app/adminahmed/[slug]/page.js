@@ -11,7 +11,16 @@ const TableAdmin = ({ params }) => {
 
     const [data, setData] = useState([]);
 
-    // console.log(data.code)
+    console.log(data.code)
+    console.log('---------------------------------====================--')
+
+    console.log(data)
+    console.log('---------------------------------====================--')
+
+    console.log(data.conditions)
+    console.log('---------------------------------====================--')
+
+
     // console.log(params.slug)
     const [isLoading, setIsLoading] = useState(true);
     const [copyStatus, setcoby] = useState(false);
