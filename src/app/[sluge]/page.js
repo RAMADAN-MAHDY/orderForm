@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import * as d3 from 'd3';
+// import * as d3 from 'd3';
 const DataComponent = ({ params }) => {
 //   console.log(params.sluge);
   const [showCashNumber , setshowCashNumber ] = useState(false) 
@@ -132,7 +132,8 @@ const DataComponent = ({ params }) => {
                 </tr>
               </thead>
               <tbody>
-                {data.conditions.map((rowData, index) => (
+                {data.map((item , index)=>
+                 item.conditions.map((rowData, index) => (
                   <tr key={rowData._id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}>
                     <td className="border border-gray-800 px-4 py-2">{rowData.clientname}</td>
                     <td className="border border-gray-800 px-4 py-2">{rowData.phone}</td>
@@ -157,7 +158,7 @@ const DataComponent = ({ params }) => {
                 
                      {/* <img src={rowData.imagePaths[0]} alt="Product" /> */}
                   </tr>
-                ))}
+                )))}
               </tbody>
             </table>
              {showCashNumber &&           <div id="cashNumberDiv" className="bg-[#bfd93b] fixed top-[10%] left-1/2 z-10 p-3 rounded-s-2xl rounded-b-full transform -translate-x-1/2 -translate-y-1/2 opacity-0">
