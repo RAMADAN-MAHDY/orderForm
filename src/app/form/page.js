@@ -127,10 +127,10 @@ const ConditionForm = () => {
         imagePaths: imageBase64 // إضافة الصور المحولة إلى Base64
       }
     };
-    console.log(err)
-  //https://api-order-form.onrender.com
+    console.log(requestData)
+
     try {
-        //https://api-order-form.onrender.com
+        //https://api-order-form.vercel.app/
       const response = await fetch('https://api-order-form.vercel.app/condition', {
         method: 'POST',
         headers: {
