@@ -12,7 +12,7 @@ const DataComponent = ({ params }) => {
   const [error, setError] = useState('');
   const [countbutton,setcountbutton] =useState(0);
   const [hiddenBut, setHiddenBut] = useState({});
-//   console.log(commitionreq)
+  console.log(data);
   useEffect(()=>{
   console.log(commitionreq)
   },[commitionreq])
