@@ -31,7 +31,7 @@ const Admin = () => {
     const handleGetCodeByClientname = async () => {
         try {
             //https://api-order-form.vercel.app
-
+            //https://api-order-form.vercel.app/
             const encodedClientname = encodeURIComponent(clientname.trim());
         console.log(encodedClientname);
 
@@ -99,6 +99,7 @@ const Admin = () => {
                 }
                 const responseData = await response.json();
                 setLength(responseData);
+                console.log(responseData)
             } catch (error) {
                 console.error('Error fetching length:', error);
                 setLengthIsLoading(false);
