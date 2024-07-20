@@ -296,12 +296,12 @@ const cancelEdit = () => {
                                     {
                                         selectedOptions[rowData._id] === '(خصم العموله)ملغي' &&
                                         <input className='p-2 rounded-2xl' type='text' placeholder='ملغي ' value={sendreqIsfiled[rowData._id] || ''} onChange={
-                                            (event) => handleInputChange(event, rowData._id, data.code)}
+                                            (event) => handleInputChange(event, rowData._id, params.slug)}
                                         />
 
                                     }
 
-                                    <button className=' bg-[#12e512df] p-2 rounded-2xl m-1' onClick={() => handleUpdateStatus(rowData._id, data.code)}>تحديث الحالة</button>
+                                    <button className=' bg-[#12e512df] p-2 rounded-2xl m-1' onClick={() => handleUpdateStatus(rowData._id, params.slug)}>تحديث الحالة</button>
                                 </div>
                             </td>
                             <td className="border border-gray-800 px-4 py-2" style={{ whiteSpace: 'nowrap' }}>{format(rowData.timestamp, `dd-MM & hh:mm a`)}</td>
