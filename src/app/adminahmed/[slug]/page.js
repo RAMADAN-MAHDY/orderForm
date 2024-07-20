@@ -179,7 +179,9 @@ const cancelEdit = () => {
                 if (!responseData.ok) {
                     notFound();
                 }
-                // console.log(responseData);
+                console.log("888888888888888888888888888");
+
+                console.log(responseData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
