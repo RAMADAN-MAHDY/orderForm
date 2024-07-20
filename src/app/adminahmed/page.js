@@ -249,9 +249,9 @@ const Admin = () => {
                                 <tr key={dataItem.code}>
                                    <td className="border border-gray-800 px-4 py-2 text-[#000000]">
                                    {length ? (
-        length.find(item => item.code === dataItem.code)?.conditionsLength < 1 ? 
+        length.find(item => item._id === dataItem.code)?.conditionsLength < 1 ? 
             0 : 
-            length.find(item => item.code === dataItem.code)?.conditionsLength
+            length.find(item => item._id === dataItem.code)?.conditionsLength
     ) : (
         0
     )}
