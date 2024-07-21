@@ -213,12 +213,10 @@ async function fetchData(id, page, limit) {
   fetchAllData(params.slug);
   
 
-      
-    }, [params.slug, refreshdata]);
-
-    useEffect(() => {
         handleGetCommition();
-    }, [isEditing]);
+    }, [params , isEditing , refreshdata]);
+
+
     //get Table Row Content to copy
     const getTableRowContent = (rowData) => {
         return `

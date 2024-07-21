@@ -92,46 +92,43 @@ const DataComponent = ({ params }) => {
     // };
 
     // fetchData();
+// client.js
 
-
-
-    async function fetchData(id, page, limit) {
-        try {
-          const response = await fetch(`https://api-order-form.vercel.app/condition/${id}?page=${page}&limit=${limit}`);
-          const data = await response.json();
-          return data;
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+async function fetchData(id, page, limit) {
+    try {
+      const response = await fetch(`https://api-order-form.vercel.app/condition/${id}?page=${page}&limit=${limit}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  
+  async function fetchAllData(id) {
+    let page = 1;
+    const limit = 10;
+    let allData = [];
+  
+    while (true) {
+      const data = await fetchData(id, page, limit);
+      if (!data) break; // إضافة تحقق للتأكد من أن البيانات موجودة
+      allData = allData.concat(data.data);
+      
+      if (page >= data.totalPages) {
+        break;
       }
-      
-      async function fetchAllData(id) {
-        let page = 1;
-        const limit = 10;
-        let allData = [];
-      
-        while (true) {
-          const data = await fetchData(id, page, limit);
-          if (!data) break; // إضافة تحقق للتأكد من أن البيانات موجودة
-          allData = allData.concat(data.data);
-          
-          if (page >= data.totalPages) {
-            break;
-          }
-          page++;
-        }
-      
-        console.log('All data:', allData);
-        setData(allData)
-        setIsLoading(false);
-      }
-      
-      // استبدل `yourId` بالمعرف الفعلي الذي تريد استخدامه
-      fetchAllData(params.slug);
+      page++;
+    }
+  
+    console.log('All data:', allData);
+    setData(allData)
+    setIsLoading(false);
+  }
+  
+  // استبدل `yourId` بالمعرف الفعلي الذي تريد استخدامه
+  fetchAllData(params.slug);
 
-
-
-  }, [params]);
+  }, [params.slug]);
 
   return (
     <div dir='rtl'>
