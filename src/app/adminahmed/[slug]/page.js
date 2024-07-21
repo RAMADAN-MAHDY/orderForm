@@ -25,7 +25,7 @@ const TableAdmin = ({ params }) => {
     const [idOrder, setidOrder] = useState();
     const [refreshdata, setrefreshdata] = useState(false);
     const [showMessage, setshowMessage] = useState(false);
-    // console.log(idOrder)
+    console.log(data)
 
     // handle PUT fetch state 
     const handleUpdateStatus = async (id, code) => {
@@ -159,23 +159,60 @@ const cancelEdit = () => {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                //https://api-order-form.onrender.com
-                const response = await fetch(`https://api-order-form.vercel.app/condition/${params.slug}`);
-                const responseData = await response.json();
-                setData(responseData);
-                setIsLoading(false);
+        // const fetchData = async () => {
+        //     try {
+        //         //https://api-order-form.onrender.com
+        //         const response = await fetch(`https://api-order-form.vercel.app/condition/${params.slug}`);
+        //         const responseData = await response.json();
+        //         setData(responseData);
+        //         setIsLoading(false);
 
-                if (!responseData.ok) {
-                    notFound();
-                }
-                // console.log(responseData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchData();
+        //         if (!responseData.ok) {
+        //             notFound();
+        //         }
+        //         // console.log(responseData);
+        //     } catch (error) {
+        //         console.error('Error fetching data:', error);
+        //     }
+        // };
+        // fetchData();
+// client.js
+
+async function fetchData(id, page, limit) {
+    try {
+      const response = await fetch(`https://api-order-form.vercel.app/condition/${id}?page=${page}&limit=${limit}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  
+  async function fetchAllData(id) {
+    let page = 1;
+    const limit = 10;
+    let allData = [];
+  
+    while (true) {
+      const data = await fetchData(id, page, limit);
+      if (!data) break; // إضافة تحقق للتأكد من أن البيانات موجودة
+      allData = allData.concat(data.data);
+      
+      if (page >= data.totalPages) {
+        break;
+      }
+      page++;
+    }
+  
+    console.log('All data:', allData);
+    setData(allData)
+    setIsLoading(false);
+  }
+  
+  // استبدل `yourId` بالمعرف الفعلي الذي تريد استخدامه
+  fetchAllData(params.slug);
+  
+
         handleGetCommition();
     }, [params , isEditing , refreshdata]);
 
