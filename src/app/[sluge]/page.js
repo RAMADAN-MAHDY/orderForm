@@ -126,9 +126,9 @@ async function fetchData(id, page, limit) {
   }
   
   // استبدل `yourId` بالمعرف الفعلي الذي تريد استخدامه
-  fetchAllData(params.slug);
+  fetchAllData(params.sluge);
 
-  }, [params.slug]);
+  }, [params.sluge]);
 
   return (
     <div dir='rtl'>
