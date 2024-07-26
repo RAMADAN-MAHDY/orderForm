@@ -232,6 +232,12 @@ async function fetchData(id, page, limit) {
     }
     return (
 <div className="relative">
+
+{data.map((item, index) =>(
+   <p>
+    {item.name}    /   {item.code}
+   </p>
+))}
             {/* عرض نموذج التعديل فوق الجدول */}
             {isEditing && selectedProduct && (
                 <ConditionForm
