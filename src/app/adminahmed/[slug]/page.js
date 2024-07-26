@@ -235,7 +235,7 @@ async function fetchData(id, page, limit) {
 
 {data.map((item, index) =>(
    <p>
-    {item.name}    /   {item.code}
+    {item[0].name}    /   {item[0].code}
    </p>
 ))}
             {/* عرض نموذج التعديل فوق الجدول */}
