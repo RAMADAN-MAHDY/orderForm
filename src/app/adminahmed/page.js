@@ -66,7 +66,7 @@ const Admin = () => {
     // console.log(newConditionnotSee)
     useEffect(() => {
         // localStorage.removeItem("newCondition");
-
+        alert("⚠️ تنبيه ⚠️ سيتم ايقاف الفورم يوم الجمعه  28 / 3/ 2025 ان شاء الله ");
         const savedConditions = JSON.parse(localStorage.getItem('newCondition')) || [];
         const savedLength = parseInt(localStorage.getItem('newConditionLength'), 10) || 0;
         setNewCondition(savedConditions);
