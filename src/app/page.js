@@ -29,7 +29,8 @@ export default function Home() {
       const [showChild, setShowChild] = useState(false)
 
       useEffect(() => {
-        setShowChild(true)
+        setShowChild(true);
+          alert("⚠️ تنبيه ⚠️ سيتم ايقاف الفورم يوم الجمعه  28 / 3/ 2025 ان شاء الله ");
 
       }, [])
 
