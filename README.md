@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# وصف مشروع Order Form
 
-## Getting Started
+مشروع "Order Form" هو تطبيق ويب لإدارة الطلبات والتقارير، مكتوب باستخدام React وNext.js مع استخدام Tailwind CSS لتصميم الواجهة. 
 
-First, run the development server:
+## المميزات الرئيسية
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **نظام تسجيل الدخول وإنشاء حساب:** يحتوي على مكونات لتسجيل الدخول وإنشاء حساب مستخدم جديد مع التحقق من صحة البيانات.
+- **إدارة الطلبات:** عرض الطلبات، تحديث حالتها، حذف الطلبات، وإرسال طلبات العمولة.
+- **عرض التقارير:** يمكن للمستخدمين عرض تقارير الطلبات الخاصة بهم باستخدام كود خاص.
+- **رفع الصور:** يدعم رفع صور متعددة وتحويلها إلى صيغة Base64 لإرسالها مع بيانات الطلب.
+- **التعامل مع API:** يتواصل مع API خارجي (https://api-order-form.vercel.app) لإجراء عمليات CRUD على الطلبات والمستخدمين.
+- **التخزين المحلي:** يستخدم LocalStorage لتخزين بعض البيانات مثل الكود وحالة الأزرار المخفية.
+- **تصميم متجاوب:** يستخدم Tailwind CSS لتوفير تصميم متجاوب وجذاب.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## الهيكلية
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- `src/app/page.js`: الصفحة الرئيسية التي تدير حالة تسجيل الدخول وتبديل بين تسجيل الدخول وإنشاء الحساب.
+- `src/app/form/page.js`: نموذج لإضافة طلب جديد مع رفع الصور.
+- `src/app/adminahmed/page.js` و`src/app/adminahmed/[slug]/page.js`: صفحات الإدارة لعرض وتحديث الطلبات.
+- `src/app/componant/`: يحتوي على مكونات مثل تسجيل الدخول، إنشاء حساب، تحديث الطلبات، والنوافذ المنبثقة.
+- `src/app/[sluge]/page.js`: صفحة لعرض بيانات الطلبات بناءً على كود المستخدم.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## التقنيات المستخدمة
 
-## Learn More
+- React مع Hooks (useState, useEffect, useCallback)
+- Next.js (النسخة الحديثة مع دعم React Server Components)
+- Tailwind CSS
+- مكتبة react-dropzone لرفع الملفات
+- Fetch API للتواصل مع الخادم
 
-To learn more about Next.js, take a look at the following resources:
+هذا المشروع موجه لإدارة الطلبات بطريقة سهلة وفعالة مع واجهة مستخدم عربية ودعم كامل للعمليات الأساسية المطلوبة في نظام الطلبات.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+        
